@@ -2,8 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import { useNavigate } from "react-router";
 
 export const Login = () => {
 
@@ -12,15 +13,18 @@ export const Login = () => {
 
     const {user, setUser} = useContext(UserContext);
 
-    const handleChange = (event) => {
-        setUsername(event.target.value);
-    }
+        const navigate = useNavigate();
 
     const handleLogin = (event) => {
         event.preventDefault();
         setUser({username});
-        setUsername("");
+        navigate(`/users/${username}`);
     }
+
+    useEffect(() => {
+        if (user.username) navigate(`/users/${username}`);
+    }, [])
+
 
 
     return (
@@ -29,7 +33,7 @@ export const Login = () => {
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="username">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="input" placeholder="Enter username" value={username} onChange={handleChange}/>
+                    <Form.Control type="input" placeholder="Enter username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Login

@@ -11,9 +11,24 @@ import {Error} from "./pages/Error"
 import {UserContext} from "./contexts/UserContext"
 import {UserPage} from "./pages/UserPage"
 
-function App() {
 
-  const [user, setUser] = useState({});
+
+function getStorageValue(key, defaultValue) {
+  const saved = localStorage.getItem(key);
+  const initial = JSON.parse(saved);
+  return initial || defaultValue;
+}
+
+function App() {
+  const [user, setUser] = useState(() => {
+    return getStorageValue("user", ({}));
+  });
+
+  const setUserInStorage = (value) => {
+    localStorage.setItem("user", JSON.stringify(value));
+    setUser(value);
+  };
+
   const [topics, setTopics] = useState([]);
   const [topicsError, setTopicsError] = useState(false)
 
@@ -22,7 +37,7 @@ function App() {
         const {topics} = await fetchTopics();
         setTopics(topics);
         setTopicsError(false);
-        }
+        } 
         catch {
           setTopicsError(true);
         }
@@ -30,7 +45,7 @@ function App() {
 
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{user, setUser: setUserInStorage}}>
     <div className="App">
       <BrowserRouter>
       <Navigation topics={topics}/>

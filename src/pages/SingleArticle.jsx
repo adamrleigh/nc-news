@@ -29,8 +29,6 @@ export const SingleArticle = (  ) => {
     }
     }, []);
 
-    console.log(articleError);
-
     return (
         <>
             {!articleError

@@ -38,3 +38,7 @@ formatTimeStamp(timeStamp);
 
 export const getTime = (timeStamp) => 
 formatTimeStamp(timeStamp, false);
+
+
+export const handleChange = (event, setThis) =>
+    setThis(event.target.value)

@@ -7,8 +7,6 @@ export const Navigation = ( {topics} ) => {
 
     const {user, setUser} = useContext(UserContext);
 
-    console.log(user);
-
     return (
 <Navbar bg="light" variant="light" style={{marginTop: "10px", border: "1px solid black"}}>
     <Container>
