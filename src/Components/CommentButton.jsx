@@ -6,8 +6,8 @@ export const CommentButton = ( {comments, setShowComments} ) => {
     return (
         <>
         {setShowComments
-        ? <Button variant="success" onClick={()=>setShowComments((curr) => !curr)} ><FaCommentAlt /> {comments}</Button>
-        : <Button variant="success" disabled ><FaCommentAlt /> {comments}</Button>
+        ? <Button variant="success" onClick={()=>setShowComments((curr) => !curr)} >{comments} comments <FaCommentAlt /> </Button>
+        : <Button variant="success" disabled >{comments} comments <FaCommentAlt /> </Button>
     }
         </>
     )

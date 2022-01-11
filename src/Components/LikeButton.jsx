@@ -1,17 +1,18 @@
 import { FaRegThumbsUp } from 'react-icons/fa';
-import { Button } from 'react-bootstrap'; 
-import { useState } from 'react';
+import { ToggleButton } from 'react-bootstrap'; 
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 
-export const LikeButton = ( {votes, clickFunc} ) => {
+export const LikeButton = ( {votes, onClick} ) => {
 
-    const [liked, setLiked] = useState(false);
+    const {user} = useContext(UserContext);
 
     return (
         <>
-        {clickFunc 
-        ? <Button variant="primary" onClick={clickFunc} ><FaRegThumbsUp /> {votes}</Button>
-        : <Button variant="primary" disabled ><FaRegThumbsUp /> {votes}</Button>
-    }
+        {user
+        ? <ToggleButton type="checkbox" variant="primary" onClick={onClick}><FaRegThumbsUp /> {votes}</ToggleButton>   
+        : <ToggleButton type="checkbox" variant="primary" disabled><FaRegThumbsUp /> {votes}</ToggleButton> 
+        }
         </>
     )
 }

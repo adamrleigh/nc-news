@@ -10,7 +10,7 @@ export const Home = ( ) => {
 
     return (
         <>
-            <h1>{topic_slug || 'All'} Articles</h1>
+            <h1 color="red">{topic_slug || 'All'}</h1>
             <Articles topic={topic_slug}/>
         </>
     )

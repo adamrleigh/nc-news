@@ -1,7 +1,14 @@
 .App {
   text-align: center;
-  margin: 20%;
+  margin: 5%;
   margin-top: 0;
+}
+
+@media screen and (min-width: 800px) {
+  .App {
+    margin: 25%;
+    margin-top: 0;
+  }
 }
 
 li {

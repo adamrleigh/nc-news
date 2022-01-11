@@ -4,10 +4,12 @@ import { Form, Button, NavItem } from 'react-bootstrap'
 import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router";
+import { postUser } from "../Utils/api";
+import { Alert } from "react-bootstrap";
 
 export const Register = () => {
 
-    const [resgisterError, setLoginError] = useState(false);
+    const [registerError, setRegisterError] = useState("");
     const [userInput, setUserInput] = useState({});
 
     const navigate = useNavigate();
@@ -18,15 +20,24 @@ export const Register = () => {
         if (user.username) navigate(`/users/${user.username}`);
     }, [])
 
-    const handleChange = (event, field) => setUserInput({...userInput, [field]: event.target.value});
-    
-    const handleRegister = (event) => {
-        event.preventDefault();
-        setUser(userInput);
-        navigate(`/users/${userInput.username}`);
+    const handleChange = (event, field) => {
+        setUserInput({...userInput, [field]: event.target.value});
+        setRegisterError("");
     }
     
-
+    const handleRegister = async (event) => {
+        try {
+        event.preventDefault();
+        const {user: userProfile} = await postUser(userInput);
+        setRegisterError("");
+        setUser(userInput);
+        navigate(`/users/${userInput.username}`);
+        }
+        catch (err) {
+            setRegisterError(err.message);
+        }
+    }
+    
     return (
         <div>
             <h1>Register</h1>
@@ -48,6 +59,11 @@ export const Register = () => {
                 </Button>
             </Form>
             <Link to="/login">Already have an account?</Link>
+            {
+                registerError 
+                ? <Alert variant="danger" color="black">{registerError}</Alert>
+                : null
+            }
         </div>
     )
 }

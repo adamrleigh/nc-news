@@ -9,6 +9,22 @@ const fetch = async (path, parameters) => {
     return data;
 }
 
+const post = async (path, body) => {
+    const {data} = await myApi.post(`/${path}`, body)
+    return data;
+}
+
+
+const patch = async (path, inc=1) => {
+    const {data} = await myApi.patch(`/${path}`, {inc_votes: inc})
+    return data;
+}
+
+const remove = async (path) => 
+    myApi.delete(`/${path}`)
+
+
+
 export const fetchArticles = async (params) => 
 await fetch('articles', params);
 
@@ -20,10 +36,38 @@ await fetch(`articles/${article_id}`);
 export const fetchComments = async (article_id) => 
 await fetch(`articles/${article_id}/comments`);
 
+
+export const fetchUserComments = async (username) => 
+await fetch(`users/${username}/comments`);
+
+export const fetchUserArticles = async (username) => {
+    const {articles} = await fetch(`articles`);
+    return articles.filter(article => article.username === username);
+}
+
 export const fetchTopics = async () => 
 await fetch(`topics`);
 
+export const fetchUser = async (username) => 
+await fetch(`users/${username}`);
 
+export const postUser = async (body) =>
+await post('users', body);
+
+export const deleteComment = async(comment_id) =>
+remove(`comments/${comment_id}`);
+
+export const deleteArticle = async(article_id) =>
+remove(`articles/${article_id}`);
+
+export const likeArticle = async(article_id, inc) =>
+    patch(`articles/${article_id}`, inc);
+
+export const likeComment = async(comment_id, inc) =>
+    patch(`comments/${comment_id}`, inc);
+
+export const postComment = async (article_id, body) =>
+await post(`articles/${article_id}`, body);
 
 const formatTimeStamp = (timeStamp, getDate=true) => {
     const [year, month, other] = timeStamp.split('-');

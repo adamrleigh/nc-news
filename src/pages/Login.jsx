@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from "react-router";
+import { fetchUser } from '../Utils/api';
 
 export const Login = () => {
 
@@ -13,12 +14,24 @@ export const Login = () => {
 
     const {user, setUser} = useContext(UserContext);
 
-        const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
+        try {
         event.preventDefault();
-        setUser({username});
+        const {user: userProfile} = await fetchUser(username);
+        setLoginError(false);
+        setUser(userProfile);
         navigate(`/users/${username}`);
+        }
+        catch (err) {
+            setLoginError(true);
+        }
+    }
+
+    const handleChange = (e) =>  {
+        setLoginError(false);
+        setUsername(e.target.value)
     }
 
     useEffect(() => {
@@ -33,13 +46,17 @@ export const Login = () => {
             <Form onSubmit={handleLogin}>
                 <Form.Group className="mb-3" controlId="username">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="input" placeholder="Enter username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+                    <Form.Control type="input" placeholder="Enter username" value={username} onChange={handleChange}/>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
             </Form>
             <Link to="/register">Don't have an account?</Link>
+            {loginError
+            ? <Alert variant="danger" color="black">User <strong>{username}</strong> not found</Alert>
+            : null
+            }
         </div>
     )
 }
