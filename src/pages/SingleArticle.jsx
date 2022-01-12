@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { fetchArticleById, fetchUser } from '../Utils/api';
 import { getDate } from '../Utils/api';
-import {Comments} from '../Components/Comments'
+import { Comments } from '../Components/Comments'
 import { CommentButton } from '../Components/CommentButton';
 import { LikeButton } from '../Components/LikeButton';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Error } from './Error';
-import { AddComment } from '../Components/AddComment';
-import { likeArticle } from '../Utils/api';
 import { UserComp } from '../Components/UserComp';
+import { DeleteButton } from '../Components/DeleteButton';
 
 export const SingleArticle = (  ) => {
 
@@ -19,10 +18,11 @@ export const SingleArticle = (  ) => {
     const [showComments, setShowComments] = useState(false);
     const [timeStamp, setTimeStamp] = useState("");
     const [articleError, setArticleError] = useState(false);
-    const [likeValue, setLikeValue] = useState(1);
     const [author, setAuthor] = useState({});
-    
-    useEffect(async () => {
+    const [commentCount, setCommentCount] = useState(0);
+
+
+     useEffect(async () => {
     try {
     const {article} = await fetchArticleById(article_id);
     const {user: authorUser} = await fetchUser(article.author);
@@ -30,25 +30,13 @@ export const SingleArticle = (  ) => {
     setAuthor(authorUser);
     setArticle(article);
     setTimeStamp(getDate(article.created_at));
+    setCommentCount(article.comment_count);
     }
     catch {
         setArticleError(true);
     }
     }, []);
 
-        const toggleLike = async () => {
-            console.log(buttonStyle)
-            setArticle(curr=>({...curr, votes: curr.votes + likeValue}));
-            try {
-                await likeArticle(article.article_id, likeValue);
-                setLikeValue(curr=>-curr);
-            }
-            catch{
-                setArticle(curr=>({...curr, votes: curr.votes - likeValue}));
-            }
-        }
-
-    const buttonStyle = (likeValue < 0 && "10px solid red") || "";
 
     return (
         <>
@@ -75,14 +63,16 @@ export const SingleArticle = (  ) => {
                     <UserComp user={author} />
                     <br></br><br></br>
                     <ButtonGroup size="md">
-                    <CommentButton setShowComments={setShowComments} comments={article.comment_count} />                
-                    <LikeButton votes={article.votes} onClick={toggleLike} style={{border: `${buttonStyle}`}}/>
+                    <CommentButton setShowComments={setShowComments} comments={commentCount} />                
+                    <LikeButton votes={article.votes} article_id={article.article_id} />
                     </ButtonGroup>
+                    <br></br>
+                    <DeleteButton article={article} />
                     <br></br>
                     <small className="text-muted">{timeStamp}</small>
                 </Card.Footer>
         </Card>
-        {showComments ? <Comments article_id={article_id}/> : null}
+        {showComments ? <Comments article_id={article_id} setCommentCount={setCommentCount} commentCount={commentCount}/> : null}
         </>
         : <Error thing="Article"/>
         }

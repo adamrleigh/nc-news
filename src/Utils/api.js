@@ -67,7 +67,10 @@ export const likeComment = async(comment_id, inc) =>
     patch(`comments/${comment_id}`, inc);
 
 export const postComment = async (article_id, body) =>
-await post(`articles/${article_id}`, body);
+await post(`articles/${article_id}/comments`, body);
+
+export const postArticle = async (body) =>
+await post(`articles`, body);
 
 const formatTimeStamp = (timeStamp, getDate=true) => {
     const [year, month, other] = timeStamp.split('-');
@@ -86,3 +89,12 @@ formatTimeStamp(timeStamp, false);
 
 export const handleChange = (event, setThis) =>
     setThis(event.target.value)
+
+
+
+
+export const getStorageValue = (key, defaultValue) => {
+  const saved = localStorage.getItem(key);
+  const initial = JSON.parse(saved);
+  return initial || defaultValue;
+}

@@ -19,12 +19,13 @@ export const UserPage = () => {
     const [showComments, setShowComments] = useState(false);
     const [userArticles, setUserArticles] = useState([]);
 
+
     useEffect (async () => {
         const {user: userProfileData} = await fetchUser(username);
         setUserProfile(userProfileData);
         const {articles} = await fetchUserArticles(username);
         setUserArticles(articles);
-    }, []);
+    }, [username]);
 
     return (
         <>

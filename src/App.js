@@ -10,14 +10,9 @@ import {fetchTopics} from "./Utils/api"
 import {Error} from "./pages/Error"
 import {UserContext} from "./contexts/UserContext"
 import {UserPage} from "./pages/UserPage"
+import {AddArticle} from "./pages/AddArticle";
+import {getStorageValue} from "./Utils/api"
 
-
-
-function getStorageValue(key, defaultValue) {
-  const saved = localStorage.getItem(key);
-  const initial = JSON.parse(saved);
-  return initial || defaultValue;
-}
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -53,6 +48,9 @@ function App() {
           <Route 
             path="/"
             element={<Home />} />
+            <Route 
+            path="/articles"
+            element={<Home />} />
           <Route 
             path="/*"
             element={<Error />} />
@@ -71,6 +69,9 @@ function App() {
             <Route
             path="/users/:username"
             element={<UserPage />} />
+            <Route
+            path="/newarticle"
+            element={<AddArticle topics={topics}/>} />
         </Routes>
       </BrowserRouter>
     </div>

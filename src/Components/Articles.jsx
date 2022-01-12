@@ -4,7 +4,7 @@ import { fetchArticles } from "../Utils/api"
 import { ArticlePreview } from "./ArticlePreview";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { Error } from "../pages/Error";
-
+import {AddArticleButton} from "../Components/AddArticleButton"
 
 export const Articles = ( {topic, author} ) => {
 
@@ -13,7 +13,6 @@ export const Articles = ( {topic, author} ) => {
     const [sortBy, setSortBy] = useState("created_at");
     const [orderBy, setOrderBy] = useState("desc");
     const [loading, setLoading] = useState(true);
-
     
     useEffect(async () => {
     try {
@@ -39,6 +38,7 @@ export const Articles = ( {topic, author} ) => {
         ? <LoadingSpinner />
         :
         <>
+        <AddArticleButton />
         {articles.length
         ? <>
         <Form onChange={(event)=>setSortBy(event.target.value)}>
@@ -93,7 +93,7 @@ export const Articles = ( {topic, author} ) => {
         </Form>
         <Row lg={1} className="g-4">
                 {articles.map(article => 
-                    <ArticlePreview article={article}/>
+                    <ArticlePreview article={article} setArticles={setArticles}/>
                 )}
         </Row>
         </>

@@ -7,7 +7,7 @@ import { UserContext } from "../contexts/UserContext";
 import { useContext } from 'react';
 import { DeleteButton } from './DeleteButton';
 
-export const ArticlePreview = ( {article, setTopic} ) => {
+export const ArticlePreview = ( {article, setTopic, setArticles} ) => {
     
     const {user} = useContext(UserContext);
 
@@ -39,8 +39,9 @@ export const ArticlePreview = ( {article, setTopic} ) => {
                     <ButtonGroup size="sm" disabled>
                         <CommentButton comments={article.comment_count} />
                         <LikeButton votes={article.votes} />
-                        {ownArticle ? <DeleteButton article_id={article.article_id} /> : null }
                     </ButtonGroup>
+                    <br></br><br></br>
+                    <DeleteButton article={article} setArticles={setArticles}/> 
                     <br></br>
                     <small className="text-muted">{getDate(article.created_at)}</small>
                 </Card.Footer>

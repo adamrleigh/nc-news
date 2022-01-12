@@ -8,7 +8,7 @@ import { DeleteButton } from './DeleteButton';
 import { LinkContainer } from 'react-router-bootstrap';
 import {likeComment} from "../Utils/api"
 
-export const SingleComment = ( {comment, isProfile} ) => {
+export const SingleComment = ( {comment, isProfile, setComments, setCommentCount} ) => {
 
     const {user} = useContext(UserContext)
     const [article, setArticle] = useState({});
@@ -18,15 +18,15 @@ export const SingleComment = ( {comment, isProfile} ) => {
     const ownComment = comment && user.username === comment.author;
     const border = (ownComment && "2px solid red") || ""
 
-    const addLike = async () => {
-            setCommentLikes(curr=>curr+1);
-            try {
-            await likeComment(comment.comment_id);
-            }
-            catch{
-                setCommentLikes(curr=>curr-1);
-            }
-        }
+    // const addLike = async () => {
+    //         setCommentLikes(curr=>curr+1);
+    //         try {
+    //         await likeComment(comment.comment_id);
+    //         }
+    //         catch{
+    //             setCommentLikes(curr=>curr-1);
+    //         }
+    //     }
 
 
     useEffect(async () => {
@@ -69,8 +69,9 @@ export const SingleComment = ( {comment, isProfile} ) => {
             </Card.Text>
             </Card.Body>
             <Card.Footer>
-            <LikeButton votes={commentLikes} onClick={addLike}/>
-            {ownComment ? <DeleteButton comment_id={comment.comment_id}/> : null}
+            <LikeButton votes={commentLikes} comment_id={comment.comment_id}/>
+            <br></br>
+            <DeleteButton comment={comment} setComments={setComments} setCommentCount={setCommentCount}/>
             <br></br>
             <small className="mb-2 text-white-50" color="">
                 {getDate(comment.created_at)} - {getTime(comment.created_at)}
