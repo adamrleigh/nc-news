@@ -20,7 +20,7 @@ export const Articles = ( {topic, author} ) => {
         const {articles} = await fetchArticles({
             topic: topic,
             sort_by: sortBy,
-            order_by: orderBy
+            order: orderBy
         })
         if (author) setArticles(articles.filter(article=> article.author === author));
         else setArticles(articles);
@@ -31,7 +31,7 @@ export const Articles = ( {topic, author} ) => {
         setTopicError(true);
         setLoading(false);
     }
-    }, [topic, sortBy]);
+    }, [topic, sortBy, orderBy]);
 
     return (
         <>
@@ -41,7 +41,7 @@ export const Articles = ( {topic, author} ) => {
         <>
         {articles.length
         ? <>
-        <Form onChange={(event)=>{setSortBy(event.target.value);console.log(sortBy)}}>
+        <Form onChange={(event)=>setSortBy(event.target.value)}>
             <Form.Label>Sort by: </Form.Label>
             <div key={`inline-radio`} className="mb-3">
         <Form.Check
@@ -67,6 +67,27 @@ export const Articles = ( {topic, author} ) => {
         name="group1"
         type='radio'
         id={`inline-radio-3`}
+      />
+            </div>
+        </Form>
+        <Form onChange={(event)=>setOrderBy(event.target.value)}>
+            <Form.Label>Order by: </Form.Label>
+            <div key={`inline-radio-2`} className="mb-3">
+        <Form.Check
+        inline
+        label="Descending"
+        value="desc"
+        name="group2"
+        type='radio'
+        id='inline-order-desc'
+      />
+      <Form.Check
+        inline
+        label="Ascending"
+        value="asc"
+        name="group2"
+        type='radio'
+        id='inline-order-asc'
       />
             </div>
         </Form>
