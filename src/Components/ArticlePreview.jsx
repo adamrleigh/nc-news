@@ -30,8 +30,6 @@ export const ArticlePreview = ({ article, setTopic, setArticles }) => {
           <CommentButton comments={article.comment_count} />
           <LikeButton votes={article.votes} />
         </ButtonGroup>
-        <br></br>
-        <br></br>
         <DeleteButton article={article} setArticles={setArticles} />
         <br></br>
         <small className="text-muted">{getDate(article.created_at)}</small>

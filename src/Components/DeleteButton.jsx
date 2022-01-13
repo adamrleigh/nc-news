@@ -44,14 +44,18 @@ export const DeleteButton = ({
   return (
     <>
       {!(article && article.author === user.username) &&
-      !(comment && comment.author === user.username) ? null : comment ? (
-        <Button size="sm" variant="danger" onClick={handleDeleteComment}>
-          Delete <FaTrash />
-        </Button>
-      ) : (
-        <Button size="sm" variant="danger" onClick={handleDeleteArticle}>
-          Delete <FaTrash />
-        </Button>
+      !(comment && comment.author === user.username) ? null : (
+        <>
+          {comment ? (
+            <Button size="sm" variant="danger" onClick={handleDeleteComment}>
+              Delete <FaTrash />
+            </Button>
+          ) : (
+            <Button size="sm" variant="danger" onClick={handleDeleteArticle}>
+              Delete <FaTrash />
+            </Button>
+          )}
+        </>
       )}
     </>
   );

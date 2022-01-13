@@ -9,6 +9,10 @@
     margin: 25%;
     margin-top: 0;
   }
+
+  #navbar {
+    height: 50px;
+  }
 }
 
 li {

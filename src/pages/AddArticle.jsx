@@ -82,6 +82,7 @@ export const AddArticle = ({ topics }) => {
             style={{ height: "150px" }}
           />
         </FloatingLabel>
+        <br></br>
         <Button variant="primary" type="submit">
           Post article
         </Button>

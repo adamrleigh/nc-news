@@ -49,7 +49,7 @@ export const SingleComment = ({
   return (
     <>
       {comment ? (
-        <Card color="white" bg="success" style={{ border: `${border}` }}>
+        <Card color="black" bg="white" style={{ border: `${border}` }}>
           {isProfile ? (
             <LinkContainer to={`/articles/${comment.article_id}`}>
               <Card.Header color="orange">{article.title}</Card.Header>
@@ -75,14 +75,13 @@ export const SingleComment = ({
               comment_id={comment.comment_id}
               disabled={isProfile}
             />
-            <br></br>
             <DeleteButton
               comment={comment}
               setComments={setComments}
               setCommentCount={setCommentCount}
             />
             <br></br>
-            <small className="mb-2 text-white-50" color="">
+            <small className="mb-2 text-muted" color="">
               {getDate(comment.created_at)} - {getTime(comment.created_at)}
             </small>
           </Card.Footer>
