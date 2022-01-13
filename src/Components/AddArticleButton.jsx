@@ -5,18 +5,17 @@ import { FaNewspaper } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 
 export const AddArticleButton = () => {
+  const { user } = useContext(UserContext);
 
-    const {user} = useContext(UserContext);
-
-    return (
-        <>
-        {user.username
-        ? 
+  return (
+    <>
+      {user.username ? (
         <LinkContainer to="/newarticle">
-        <Button variant="warning">New article <FaNewspaper /></Button>
+          <Button variant="warning">
+            New article <FaNewspaper />
+          </Button>
         </LinkContainer>
-        : null
-        }
-        </>
-    )
-}
+      ) : null}
+    </>
+  );
+};

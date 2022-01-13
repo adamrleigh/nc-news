@@ -1,0 +1,6 @@
+
+- Make users clickable
+- Fix pagination when reach end
+- Sort out styling for queries, navbar etc.
+
+- Fix delete article bug
