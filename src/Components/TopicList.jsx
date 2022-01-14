@@ -47,30 +47,32 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
               {" Articles"}
             </Offcanvas.Title>
           </ListGroup.Item>
-          <ListGroup
-            variant="flush"
-            as="ul"
-            onClick={() => {
-              setShowOffCanvas(false);
-              setShowTopics(false);
-            }}
-            hidden={!showTopics}
-          >
-            <LinkContainer to={`/articles/`}>
-              <ListGroup.Item as="li">
-                {""}
-                {<FaGlobeEurope />}
-                {" All"}
-              </ListGroup.Item>
-            </LinkContainer>
-            {topics.map((topic) => (
-              <LinkContainer to={`/topics/${topic.slug}`}>
+          <div style={{ marginLeft: "40px" }}>
+            <ListGroup
+              variant="flush"
+              as="ul"
+              onClick={() => {
+                setShowOffCanvas(false);
+                setShowTopics(false);
+              }}
+              hidden={!showTopics}
+            >
+              <LinkContainer to={`/articles/`}>
                 <ListGroup.Item as="li">
-                  {icons[topic.slug]} {topic.slug}
+                  {""}
+                  {<FaGlobeEurope />}
+                  {" All"}
                 </ListGroup.Item>
               </LinkContainer>
-            ))}
-          </ListGroup>
+              {topics.map((topic) => (
+                <LinkContainer to={`/topics/${topic.slug}`}>
+                  <ListGroup.Item as="li">
+                    {icons[topic.slug]} {topic.slug}
+                  </ListGroup.Item>
+                </LinkContainer>
+              ))}
+            </ListGroup>
+          </div>
           {user.username && (
             <ListGroup.Item>
               <Offcanvas.Title

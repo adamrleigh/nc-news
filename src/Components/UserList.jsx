@@ -66,15 +66,18 @@ export const UserList = ({ showOffCanvas, setShowOffCanvas }) => {
           </div>
         </Form>
         <br></br>
-        <FaQuestionCircle />
-        <span
-          onClick={() => {
-            navigate("/register");
-            setShowOffCanvas(false);
-          }}
-        >
-          <strong>{" Don't have an account? Register here"}</strong>
-        </span>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <span
+            onClick={() => {
+              navigate("/register");
+              setShowOffCanvas(false);
+            }}
+          >
+            <strong style={{ textDecoration: "underline" }}>
+              Don't have an account? Register here
+            </strong>
+          </span>
+        </div>
       </Offcanvas.Body>
     </Offcanvas>
   );

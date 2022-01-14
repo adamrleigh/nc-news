@@ -13,14 +13,15 @@ export const PaginationButtons = ({ page, setPage, limit, totalCount }) => {
 
   return (
     <>
-      {pageButtons.length ? (
-        <Pagination>
+      <br></br>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Pagination className="align-items-center">
           <Pagination.Item onClick={() => setPage(1)} active={page === 1}>
             1
           </Pagination.Item>
           {pageButtons}
         </Pagination>
-      ) : null}
+      </div>
     </>
   );
 };

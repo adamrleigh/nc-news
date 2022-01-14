@@ -117,7 +117,6 @@ export const Articles = ({ topic, author, hideAddButton }) => {
                   <ArticlePreview article={article} setArticles={setArticles} />
                 ))}
               </Row>
-              <br></br>
               <PaginationButtons
                 page={page}
                 setPage={setPage}
