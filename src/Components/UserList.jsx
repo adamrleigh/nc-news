@@ -41,6 +41,10 @@ export const UserList = ({ showOffCanvas, setShowOffCanvas }) => {
       onHide={() => setShowOffCanvas(false)}
       placement="end"
     >
+      <Offcanvas.Header
+        closeButton
+        className="align-self-start"
+      ></Offcanvas.Header>
       <Offcanvas.Title className="align-self-center">Login</Offcanvas.Title>
       <Offcanvas.Body>
         <Form onSubmit={handleLogin}>

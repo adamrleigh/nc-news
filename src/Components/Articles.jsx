@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form, Row, Nav } from "react-bootstrap";
-import { fetchArticles } from "../Utils/api";
+import { fetchArticles, fetchUserArticles } from "../Utils/api";
 import { ArticlePreview } from "./ArticlePreview";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { Error } from "../pages/Error";
@@ -11,6 +11,7 @@ import { FaSort } from "react-icons/fa";
 import { FaSortAmountUp, FaSortAmountDown } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { NavDropdown } from "react-bootstrap";
+import { useParams } from "react-router";
 
 export const Articles = ({ topic, author, hideAddButton }) => {
   const [articles, setArticles] = useState([]);
@@ -18,9 +19,6 @@ export const Articles = ({ topic, author, hideAddButton }) => {
   const [orderBy, setOrderBy] = useState("desc");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  const [totalCount, setTotalCount] = useState(0);
-
   const [searchParams] = useSearchParams();
 
   const [sortBy, setSortBy] = useState(
@@ -43,30 +41,31 @@ export const Articles = ({ topic, author, hideAddButton }) => {
   const sortTitle = (
     <>
       <FaSort />
-      Sort by
+      {sortByLookup[sortBy]}
     </>
   );
 
+  console.log(articles);
+
   const LIMIT = 5;
 
-  console.log(page);
-
   useEffect(async () => {
+    const requestBody = {
+      limit: LIMIT,
+      p: page,
+      topic: topic,
+      sort_by: sortBy,
+      order: orderBy,
+    };
     try {
-      const { articles, total_count } = await fetchArticles({
-        limit: LIMIT,
-        p: page,
-        topic: topic,
-        sort_by: sortBy,
-        order: orderBy,
-      });
-      if (author)
-        setArticles(articles.filter((article) => article.author === author));
-      else setArticles(articles);
-      setTotalCount(total_count);
+      const { articles } = !hideAddButton
+        ? await fetchArticles(requestBody)
+        : await fetchUserArticles(author, requestBody);
+      setArticles(articles);
       setTopicError(false);
       setLoading(false);
     } catch {
+      console.log(!hideAddButton, fetchUserArticles, requestBody);
       setTopicError(true);
       setLoading(false);
     }
@@ -78,29 +77,35 @@ export const Articles = ({ topic, author, hideAddButton }) => {
         <LoadingSpinner />
       ) : (
         <>
-          <Nav className="justify-content-end" activeKey="/home">
-            <NavDropdown title={sortTitle} id="nav-dropdown">
-              <NavDropdown.Item>
-                <strong>{sortByLookup[sortBy]}</strong>
-              </NavDropdown.Item>
-              {Object.keys(sortByLookup).map((sortKey) => (
-                <NavDropdown.Item
-                  onClick={() => {
-                    setSortBy(sortKey);
-                    setPage(1);
-                  }}
-                  hidden={sortKey === sortBy}
-                >
-                  {sortByLookup[sortKey]}
+          {articles.length && (
+            <Nav className="justify-content-end" activeKey="/home">
+              <NavDropdown title={sortTitle} id="nav-dropdown">
+                <NavDropdown.Item>
+                  <strong>{sortByLookup[sortBy]}</strong>
                 </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-            <Nav.Item>
-              <Nav.Link onClick={toggleOrder}>
-                {orderBy === "desc" ? <FaSortAmountDown /> : <FaSortAmountUp />}
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
+                {Object.keys(sortByLookup).map((sortKey) => (
+                  <NavDropdown.Item
+                    onClick={() => {
+                      setSortBy(sortKey);
+                      setPage(1);
+                    }}
+                    hidden={sortKey === sortBy}
+                  >
+                    {sortByLookup[sortKey]}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+              <Nav.Item>
+                <Nav.Link onClick={toggleOrder}>
+                  {orderBy === "desc" ? (
+                    <FaSortAmountDown />
+                  ) : (
+                    <FaSortAmountUp />
+                  )}
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          )}
           {articles.length ? (
             <>
               <Row lg={1} className="g-4">
@@ -108,21 +113,17 @@ export const Articles = ({ topic, author, hideAddButton }) => {
                   <ArticlePreview article={article} setArticles={setArticles} />
                 ))}
               </Row>
+              <br></br>
               <PaginationButtons
                 page={page}
                 setPage={setPage}
                 limit={LIMIT}
-                totalCount={totalCount}
+                totalCount={articles[0].total_count}
               />
-              <p>Page: {page}</p>
             </>
           ) : (
             <>
-              {page === 1 ? (
-                <h4>No articles found</h4>
-              ) : (
-                <h4>Fix pagination</h4>
-              )}
+              (<h4>No articles found</h4>)
             </>
           )}
         </>

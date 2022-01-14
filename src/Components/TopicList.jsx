@@ -8,12 +8,7 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import {
-  FaNewspaper,
-  FaUserCircle,
-  FaSignOutAlt,
-  FaUtensils,
-} from "react-icons/fa";
+import { FaNewspaper, FaSignOutAlt, FaUtensils, FaUsers } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -39,6 +34,11 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
         setShowTopics(false);
       }}
     >
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title style={{ color: "rgb(255, 0, 0)" }}>
+          Northcoders news
+        </Offcanvas.Title>
+      </Offcanvas.Header>
       <Offcanvas.Body>
         <ListGroup variant="flush" as="ul">
           <ListGroup.Item>
@@ -71,17 +71,19 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
               </LinkContainer>
             ))}
           </ListGroup>
-          <ListGroup.Item>
-            <Offcanvas.Title
-              onClick={() => {
-                setShowOffCanvas(false);
-                navigate(user.username ? "/newarticle" : "/login");
-              }}
-            >
-              <FaPencilAlt />
-              {" Add new article"}
-            </Offcanvas.Title>
-          </ListGroup.Item>
+          {user.username && (
+            <ListGroup.Item>
+              <Offcanvas.Title
+                onClick={() => {
+                  setShowOffCanvas(false);
+                  navigate(user.username ? "/newarticle" : "/login");
+                }}
+              >
+                <FaPencilAlt />
+                {" Add new article"}
+              </Offcanvas.Title>
+            </ListGroup.Item>
+          )}
           <ListGroup.Item>
             <Offcanvas.Title
               onClick={() => {
@@ -89,22 +91,24 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
                 navigate("/users");
               }}
             >
-              <FaUserCircle />
+              <FaUsers />
               {" Users"}
             </Offcanvas.Title>
           </ListGroup.Item>
-          <ListGroup.Item>
-            <Offcanvas.Title
-              onClick={() => {
-                setUser("");
-                setShowOffCanvas(false);
-                navigate("/");
-              }}
-            >
-              <FaSignOutAlt />
-              {" Logout"}
-            </Offcanvas.Title>
-          </ListGroup.Item>
+          {user.username && (
+            <ListGroup.Item>
+              <Offcanvas.Title
+                onClick={() => {
+                  setUser("");
+                  setShowOffCanvas(false);
+                  navigate("/");
+                }}
+              >
+                <FaSignOutAlt />
+                {" Logout"}
+              </Offcanvas.Title>
+            </ListGroup.Item>
+          )}
         </ListGroup>
       </Offcanvas.Body>
     </Offcanvas>

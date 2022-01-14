@@ -24,7 +24,7 @@ export const Navigation = ({ topics }) => {
     <>
       <Navbar
         fixed="top"
-        style={{ backgroundColor: "red", color: "white" }}
+        style={{ backgroundColor: "rgb(200,0,0)", color: "white" }}
         variant="dark"
         id="navbar"
       >

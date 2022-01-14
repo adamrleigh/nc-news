@@ -26,16 +26,14 @@ export const fetchArticles = async (params) => await fetch("articles", params);
 export const fetchArticleById = async (article_id) =>
   await fetch(`articles/${article_id}`);
 
-export const fetchComments = async (article_id) =>
-  await fetch(`articles/${article_id}/comments`);
+export const fetchComments = async (article_id, params) =>
+  await fetch(`articles/${article_id}/comments`, params);
 
-export const fetchUserComments = async (username) =>
-  await fetch(`users/${username}/comments`);
+export const fetchUserComments = async (username, params) =>
+  await fetch(`users/${username}/comments`, params);
 
-export const fetchUserArticles = async (username) => {
-  const { articles } = await fetch(`articles`);
-  return articles.filter((article) => article.username === username);
-};
+export const fetchUserArticles = async (username, params) =>
+  await fetch(`users/${username}/articles`, params);
 
 export const fetchTopics = async () => await fetch(`topics`);
 
