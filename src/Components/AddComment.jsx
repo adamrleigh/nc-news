@@ -48,10 +48,10 @@ export const AddComment = ({
             style={{ height: "150px" }}
           />
         </FloatingLabel>
-        <ButtonGroup>
+        <div className="d-grid gap-2">
           <WriteButton size="lg" />
           <CancelButton setState={setState} />
-        </ButtonGroup>
+        </div>
       </Form>
       <br></br>
       {postError ? <Alert variant="danger">{postError}</Alert> : null}

@@ -60,11 +60,6 @@ export const SingleComment = ({
             <Card.Text>{comment.body}</Card.Text>
           </Card.Body>
           <Card.Footer>
-            <LikeButton
-              votes={commentLikes}
-              comment_id={comment.comment_id}
-              disabled={isProfile}
-            />
             <DeleteButton
               comment={comment}
               setComments={setComments}
@@ -75,6 +70,11 @@ export const SingleComment = ({
               {getDate(comment.created_at)} - {getTime(comment.created_at)}
             </small>
           </Card.Footer>
+          <LikeButton
+            votes={commentLikes}
+            comment_id={comment.comment_id}
+            disabled={isProfile}
+          />
         </Card>
       ) : (
         <LoadingSpinner />

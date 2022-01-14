@@ -46,12 +46,14 @@ export const DeleteButton = ({
         <>
           {comment ? (
             <Button size="sm" variant="danger" onClick={handleDeleteComment}>
-              Delete <FaTrash />
+              Delete comment
+              <FaTrash />
             </Button>
           ) : (
             <>
               <Button size="sm" variant="danger" onClick={handleDeleteArticle}>
-                Delete <FaTrash />
+                Delete article
+                <FaTrash />
               </Button>
               <br></br>
             </>

@@ -51,19 +51,18 @@ export const SingleArticle = () => {
               <Card.Text>{article.body}</Card.Text>
             </Card.Body>
             <Card.Footer>
-              <div className="d-grid gap-1">
-                <small onClick={() => navigate(`/users/${article.author}`)}>
-                  @{article.author}
-                  <br></br>
-                  <img
-                    src={author.avatar_url}
-                    alt={`${article.authors}'s avatar'`}
-                    style={{ width: "40px", height: "40px" }}
-                  />
-                </small>
+              <small onClick={() => navigate(`/users/${article.author}`)}>
+                @{article.author}
                 <br></br>
-                <small className="text-muted">{timeStamp}</small>
-              </div>
+                <img
+                  src={author.avatar_url}
+                  alt={`${article.authors}'s avatar'`}
+                  style={{ width: "40px", height: "40px" }}
+                />
+              </small>
+              <br></br>
+              <DeleteButton article={article} />
+              <small className="text-muted">{timeStamp}</small>
             </Card.Footer>
             <ButtonGroup size="md">
               <CommentButton
@@ -76,7 +75,6 @@ export const SingleArticle = () => {
               />
             </ButtonGroup>
             <br></br>
-            <DeleteButton article={article} />
           </Card>
           <br></br>
           <br></br>

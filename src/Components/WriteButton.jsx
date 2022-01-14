@@ -4,7 +4,7 @@ import { FaPaperPlane } from "react-icons/fa";
 export const WriteButton = () => {
   return (
     <Button type="submit" variant="success">
-      <FaPaperPlane />
+      Add comment <FaPaperPlane />
     </Button>
   );
 };
