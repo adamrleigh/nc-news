@@ -49,9 +49,12 @@ export const DeleteButton = ({
               Delete <FaTrash />
             </Button>
           ) : (
-            <Button size="sm" variant="danger" onClick={handleDeleteArticle}>
-              Delete <FaTrash />
-            </Button>
+            <>
+              <Button size="sm" variant="danger" onClick={handleDeleteArticle}>
+                Delete <FaTrash />
+              </Button>
+              <br></br>
+            </>
           )}
         </>
       )}

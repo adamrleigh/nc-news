@@ -5,7 +5,6 @@ import { LikeButton } from "./LikeButton";
 import { CommentButton } from "./CommentButton";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
-import { DeleteButton } from "./DeleteButton";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
@@ -38,29 +37,32 @@ export const ArticlePreview = ({ article, page, setTopic, setArticles }) => {
       </LinkContainer>
       <Card.Body>
         <LinkContainer to={`/articles/${article.article_id}`}>
-          <Card.Title>{article.title}</Card.Title>
+          <Card.Title>
+            <strong>{article.title}</strong>
+          </Card.Title>
         </LinkContainer>
       </Card.Body>
       <Card.Footer>
-        <small onClick={() => navigate(`/users/${article.author}`)}>
-          @{article.author}
+        <div className="d-grid gap-1">
+          <small onClick={() => navigate(`/users/${article.author}`)}>
+            @{article.author}
+            <br></br>
+            <img
+              src={avatar}
+              alt={`${article.authors}'s avatar'`}
+              style={{ width: "40px", height: "40px" }}
+            />
+          </small>
           <br></br>
-          <img
-            src={avatar}
-            alt={`${article.authors}'s avatar'`}
-            style={{ width: "40px", height: "40px" }}
-          />
-        </small>
-        <br></br>
-        <br></br>
-        <ButtonGroup size="sm" disabled>
+          <small className="text-muted">{getDate(article.created_at)}</small>
+        </div>
+      </Card.Footer>
+      <div className="d-grid gap-1">
+        <ButtonGroup size="md" disabled>
           <CommentButton comments={article.comment_count} />
           <LikeButton votes={article.votes} />
         </ButtonGroup>
-        <DeleteButton article={article} setArticles={setArticles} />
-        <br></br>
-        <small className="text-muted">{getDate(article.created_at)}</small>
-      </Card.Footer>
+      </div>
     </Card>
   );
 };

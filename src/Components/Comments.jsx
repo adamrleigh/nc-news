@@ -78,7 +78,7 @@ export const Comments = ({
               variant="warning"
               onClick={() => setShowAddComment((curr) => !curr)}
             >
-              <FaPencilAlt />
+              Add comment <FaPencilAlt />
             </Button>
           ) : null}
           {showAddComment ? (
@@ -89,7 +89,7 @@ export const Comments = ({
               setCommentCount={setCommentCount}
             />
           ) : null}
-          {comments.length && (
+          {comments.length !== 0 && (
             <Nav className="justify-content-end">
               <NavDropdown title={sortTitle} id="nav-dropdown">
                 <NavDropdown.Item>

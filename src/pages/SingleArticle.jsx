@@ -8,7 +8,7 @@ import { CommentButton } from "../Components/CommentButton";
 import { LikeButton } from "../Components/LikeButton";
 import { LinkContainer } from "react-router-bootstrap";
 import { Error } from "./Error";
-import { UserComp } from "../Components/UserComp";
+import { useNavigate } from "react-router";
 import { DeleteButton } from "../Components/DeleteButton";
 
 export const SingleArticle = () => {
@@ -19,6 +19,8 @@ export const SingleArticle = () => {
   const [articleError, setArticleError] = useState(false);
   const [author, setAuthor] = useState({});
   const [commentCount, setCommentCount] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(async () => {
     try {
@@ -49,25 +51,35 @@ export const SingleArticle = () => {
               <Card.Text>{article.body}</Card.Text>
             </Card.Body>
             <Card.Footer>
-              <UserComp user={author} />
-              <br></br>
-              <br></br>
-              <ButtonGroup size="md">
-                <CommentButton
-                  setShowComments={setShowComments}
-                  comments={commentCount}
-                />
-                <LikeButton
-                  votes={article.votes}
-                  article_id={article.article_id}
-                />
-              </ButtonGroup>
-              <br></br>
-              <DeleteButton article={article} />
-              <br></br>
-              <small className="text-muted">{timeStamp}</small>
+              <div className="d-grid gap-1">
+                <small onClick={() => navigate(`/users/${article.author}`)}>
+                  @{article.author}
+                  <br></br>
+                  <img
+                    src={author.avatar_url}
+                    alt={`${article.authors}'s avatar'`}
+                    style={{ width: "40px", height: "40px" }}
+                  />
+                </small>
+                <br></br>
+                <small className="text-muted">{timeStamp}</small>
+              </div>
             </Card.Footer>
+            <ButtonGroup size="md">
+              <CommentButton
+                setShowComments={setShowComments}
+                comments={commentCount}
+              />
+              <LikeButton
+                votes={article.votes}
+                article_id={article.article_id}
+              />
+            </ButtonGroup>
+            <br></br>
+            <DeleteButton article={article} />
           </Card>
+          <br></br>
+          <br></br>
           {showComments ? (
             <Comments
               article_id={article_id}

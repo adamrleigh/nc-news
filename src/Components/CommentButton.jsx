@@ -9,11 +9,11 @@ export const CommentButton = ({ comments, setShowComments }) => {
           variant="success"
           onClick={() => setShowComments((curr) => !curr)}
         >
-          {comments} comments <FaCommentAlt />{" "}
+          {comments} <FaCommentAlt />{" "}
         </Button>
       ) : (
         <Button variant="success" disabled>
-          {comments} comments <FaCommentAlt />{" "}
+          {comments} <FaCommentAlt />{" "}
         </Button>
       )}
     </>

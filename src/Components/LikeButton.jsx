@@ -56,11 +56,11 @@ export const LikeButton = ({ votes, comment_id, article_id, disabled }) => {
     <>
       {!disabled && user.username && (comment_id || article_id) ? (
         <ToggleButton type="checkbox" variant="primary" onClick={handleClick}>
-          {icon} {count}
+          {`${count} `} {icon}
         </ToggleButton>
       ) : (
         <ToggleButton type="checkbox" variant="primary" disabled>
-          {icon} {count}
+          {`${count} `} {icon}
         </ToggleButton>
       )}
     </>
