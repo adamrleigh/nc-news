@@ -3,7 +3,7 @@ import { Pagination } from "react-bootstrap";
 export const PaginationButtons = ({ page, setPage, limit, totalCount }) => {
   let pageButtons = [];
 
-  for (let p = 1; p * limit <= totalCount; p++) {
+  for (let p = 1; p * limit < totalCount; p++) {
     pageButtons.push(
       <Pagination.Item
         onClick={() => setPage(p + 1)}
