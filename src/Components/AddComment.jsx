@@ -20,7 +20,7 @@ export const AddComment = ({
   const sendComment = async (event) => {
     event.preventDefault();
     setPostError(false);
-    setCommentCount((curr) => curr + 1);
+    setCommentCount((curr) => Number(curr) + 1);
     try {
       const { comment } = await postComment(article_id, {
         author: user.username,
