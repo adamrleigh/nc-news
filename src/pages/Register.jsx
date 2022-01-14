@@ -6,6 +6,7 @@ import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router";
 import { postUser } from "../Utils/api";
 import { Alert } from "react-bootstrap";
+import { FloatingLabel } from "react-bootstrap";
 
 export const Register = () => {
   const [registerError, setRegisterError] = useState("");
@@ -41,32 +42,35 @@ export const Register = () => {
       <h1>Register</h1>
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formUserName">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            required
-            type="input"
-            placeholder="Enter your username"
-            value={userInput.username}
-            onChange={(e) => handleChange(e, "username")}
-          />
+          <FloatingLabel controlId="floatingUsername" label="Username">
+            <Form.Control
+              required
+              type="input"
+              placeholder="Enter your username"
+              value={userInput.username}
+              onChange={(e) => handleChange(e, "username")}
+            />
+          </FloatingLabel>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formName">
-          <Form.Label>Full name</Form.Label>
-          <Form.Control
-            required
-            placeholder="Enter your name"
-            value={userInput.name}
-            onChange={(e) => handleChange(e, "name")}
-          />
+          <FloatingLabel controlId="floatingUsername" label="Full name">
+            <Form.Control
+              required
+              placeholder="Enter your name"
+              value={userInput.name}
+              onChange={(e) => handleChange(e, "name")}
+            />
+          </FloatingLabel>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formAvatarUrl">
-          <Form.Label>Avatar URL</Form.Label>
-          <Form.Control
-            required
-            placeholder="Enter avatar URL"
-            value={userInput.avatar_url}
-            onChange={(e) => handleChange(e, "avatar_url")}
-          />
+          <FloatingLabel controlId="floatingUsername" label="Avatar URL">
+            <Form.Control
+              required
+              placeholder="Enter avatar URL"
+              value={userInput.avatar_url}
+              onChange={(e) => handleChange(e, "avatar_url")}
+            />
+          </FloatingLabel>
         </Form.Group>
         <Button variant="primary" type="submit">
           Register

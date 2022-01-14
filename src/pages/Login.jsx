@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, FloatingLabel } from "react-bootstrap";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router";
@@ -41,14 +41,15 @@ export const Login = () => {
       <h1>Login</h1>
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="input"
-            placeholder="Enter username"
-            value={username}
-            onChange={handleChange}
-            required
-          />
+          <FloatingLabel controlId="floatingUsername" label="Username">
+            <Form.Control
+              type="input"
+              placeholder="Enter username"
+              value={username}
+              onChange={handleChange}
+              required
+            />
+          </FloatingLabel>
         </Form.Group>
         <Button variant="primary" type="submit">
           Login
