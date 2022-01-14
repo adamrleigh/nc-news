@@ -42,11 +42,6 @@ export const ArticlePreview = ({ article, page, setTopic, setArticles }) => {
         </LinkContainer>
       </Card.Body>
       <Card.Footer>
-        <ButtonGroup size="sm" disabled>
-          <CommentButton comments={article.comment_count} />
-          <LikeButton votes={article.votes} />
-        </ButtonGroup>
-        <br></br>
         <small onClick={() => navigate(`/users/${article.author}`)}>
           @{article.author}
           <br></br>
@@ -56,6 +51,12 @@ export const ArticlePreview = ({ article, page, setTopic, setArticles }) => {
             style={{ width: "40px", height: "40px" }}
           />
         </small>
+        <br></br>
+        <br></br>
+        <ButtonGroup size="sm" disabled>
+          <CommentButton comments={article.comment_count} />
+          <LikeButton votes={article.votes} />
+        </ButtonGroup>
         <DeleteButton article={article} setArticles={setArticles} />
         <br></br>
         <small className="text-muted">{getDate(article.created_at)}</small>

@@ -24,9 +24,9 @@ export const Users = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <Row lg={1} className="g-4">
+          <Row xs={3} className="g-4">
             {users.map((user) => (
-              <UserPage user={user} />
+              <UserPage user={user} key={user.username} />
             ))}
           </Row>
         </>

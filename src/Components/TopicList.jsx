@@ -43,7 +43,7 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
               {" Articles"}
             </Offcanvas.Title>
           </ListGroup.Item>
-          <div style={{ marginLeft: "40px" }}>
+          <div style={{ marginLeft: "30px" }}>
             <ListGroup
               variant="flush"
               as="ul"
@@ -56,11 +56,14 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
               <LinkContainer to={`/articles/`}>
                 <ListGroup.Item as="li">
                   {<FaGlobeEurope />}
-                  {" All"}
+                  {" All articles"}
                 </ListGroup.Item>
               </LinkContainer>
               {topics.map((topic) => (
-                <LinkContainer to={`/topics/${topic.slug}`}>
+                <LinkContainer
+                  to={`/topics/${topic.slug}`}
+                  style={{ marginLeft: "20px" }}
+                >
                   <ListGroup.Item as="li">
                     {icons[topic.slug]} {topic.slug}
                   </ListGroup.Item>
@@ -87,7 +90,7 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
               {" Users"}
             </Offcanvas.Title>
           </ListGroup.Item>
-          <div style={{ marginLeft: "40px" }}>
+          <div style={{ marginLeft: "30px" }}>
             <ListGroup
               variant="flush"
               as="ul"
@@ -100,16 +103,22 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
               <LinkContainer to={`/users/`}>
                 <ListGroup.Item as="li">
                   {<FaGlobeEurope />}
-                  {" All"}
+                  {" All users"}
                 </ListGroup.Item>
               </LinkContainer>
-              <LinkContainer to={`/underconstruction`}>
+              <LinkContainer
+                to={`/underconstruction`}
+                style={{ marginLeft: "20px" }}
+              >
                 <ListGroup.Item as="li">
                   {<FaStar />}
                   {" Most active"}
                 </ListGroup.Item>
               </LinkContainer>
-              <LinkContainer to={`/underconstruction`}>
+              <LinkContainer
+                to={`/underconstruction`}
+                style={{ marginLeft: "20px" }}
+              >
                 <ListGroup.Item as="li">
                   {<FaAward />}
                   {" Highest rated"}

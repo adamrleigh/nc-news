@@ -44,12 +44,15 @@ function App() {
         <BrowserRouter>
           <Navigation topics={topics} />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/articles" element={<Home />} />
+            <Route path="/" element={<Home topics={topics} />} />
+            <Route path="/articles" element={<Home topics={topics} />} />
             <Route path="/*" element={<Error />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/topics/:topic_slug" element={<Home />} />
+            <Route
+              path="/topics/:topic_slug"
+              element={<Home topics={topics} />}
+            />
             <Route path="/articles/:article_id" element={<SingleArticle />} />
             <Route path="/users/:username" element={<UserPage />} />
             <Route path="/users/" element={<Users />} />

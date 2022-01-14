@@ -37,7 +37,7 @@ export const Navigation = ({ topics }) => {
               }}
             >
               <Navbar.Brand className="justify-content-center">
-                Northcoders news
+                {"Northcoders news "}
               </Navbar.Brand>
             </LinkContainer>
             <TopicList

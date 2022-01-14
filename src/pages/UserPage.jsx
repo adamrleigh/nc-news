@@ -33,7 +33,7 @@ export const UserPage = ({ user }) => {
     <>
       {userProfile.username ? (
         <>
-          <Card>
+          <Card variant="light">
             <UserComp user={userProfile} disabled={user ? 0 : 1} />
             {!user && (
               <ButtonGroup size="sm" className="mb-2">
