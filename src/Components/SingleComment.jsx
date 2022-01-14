@@ -52,7 +52,7 @@ export const SingleComment = ({
                   src={commenter.avatar_url}
                   style={{ width: "40px", height: "40px" }}
                   alt={`${commenter.username}'s avatar`}
-                ></img>
+                />
               </Card.Header>
             </LinkContainer>
           )}
