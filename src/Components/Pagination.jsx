@@ -12,11 +12,15 @@ export const PaginationButtons = ({ page, setPage, limit, totalCount }) => {
   }
 
   return (
-    <Pagination>
-      <Pagination.Item onClick={() => setPage(1)} active={page === 1}>
-        1
-      </Pagination.Item>
-      {pageButtons}
-    </Pagination>
+    <>
+      {pageButtons.length ? (
+        <Pagination>
+          <Pagination.Item onClick={() => setPage(1)} active={page === 1}>
+            1
+          </Pagination.Item>
+          {pageButtons}
+        </Pagination>
+      ) : null}
+    </>
   );
 };

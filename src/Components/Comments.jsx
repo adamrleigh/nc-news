@@ -8,6 +8,7 @@ import { UserContext } from "../contexts/UserContext";
 import { PaginationButtons } from "./Pagination";
 import { Nav, NavDropdown } from "react-bootstrap";
 import { FaSort, FaSortAmountUp, FaSortAmountDown } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 export const Comments = ({
   article_id,
@@ -41,6 +42,8 @@ export const Comments = ({
     </>
   );
 
+  const navigate = useNavigate();
+
   const LIMIT = 5;
 
   useEffect(async () => {
@@ -60,6 +63,12 @@ export const Comments = ({
       console.log(err);
     }
   }, [page, sortBy, orderBy, commentCount]);
+
+  useEffect(async () => {
+    setPage(1);
+  }, [sortBy, orderBy, navigate]);
+
+  console.log(comments);
 
   return (
     <>

@@ -6,9 +6,12 @@ import { CommentButton } from "./CommentButton";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 import { DeleteButton } from "./DeleteButton";
+import { useNavigate } from "react-router";
 
 export const ArticlePreview = ({ article, setTopic, setArticles }) => {
   const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const ownArticle = article.author === user.username;
   const border = (ownArticle && "5px solid red") || "";
@@ -30,6 +33,10 @@ export const ArticlePreview = ({ article, setTopic, setArticles }) => {
           <CommentButton comments={article.comment_count} />
           <LikeButton votes={article.votes} />
         </ButtonGroup>
+        <br></br>
+        <small onClick={() => navigate(`/users/${article.author}`)}>
+          @{article.author}
+        </small>
         <DeleteButton article={article} setArticles={setArticles} />
         <br></br>
         <small className="text-muted">{getDate(article.created_at)}</small>

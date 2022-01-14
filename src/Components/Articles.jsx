@@ -71,13 +71,17 @@ export const Articles = ({ topic, author, hideAddButton }) => {
     }
   }, [topic, sortBy, orderBy, page, searchParams, navigate]);
 
+  useEffect(async () => {
+    setPage(1);
+  }, [topic, sortBy, orderBy, searchParams, navigate]);
+
   return (
     <>
       {loading ? (
         <LoadingSpinner />
       ) : (
         <>
-          {articles.length && (
+          {articles.length > 0 && (
             <Nav className="justify-content-end" activeKey="/home">
               <NavDropdown title={sortTitle} id="nav-dropdown">
                 <NavDropdown.Item>
@@ -123,7 +127,7 @@ export const Articles = ({ topic, author, hideAddButton }) => {
             </>
           ) : (
             <>
-              (<h4>No articles found</h4>)
+              <h4>No articles found</h4>
             </>
           )}
         </>
