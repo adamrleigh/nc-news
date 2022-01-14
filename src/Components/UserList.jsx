@@ -1,13 +1,10 @@
-import { Offcanvas, ListGroup, Dropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { fetchUser } from "../Utils/api";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FaQuestion, FaQuestionCircle } from "react-icons/fa";
 
 export const UserList = ({ showOffCanvas, setShowOffCanvas }) => {
   const [loginError, setLoginError] = useState(false);

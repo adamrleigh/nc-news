@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { UserContext } from "../contexts/UserContext";
 import { fetchArticleById, fetchUser, getDate, getTime } from "../Utils/api";
 import { LikeButton } from "./LikeButton";
@@ -6,7 +6,6 @@ import { LoadingSpinner } from "./LoadingSpinner";
 import { useContext, useEffect, useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { LinkContainer } from "react-router-bootstrap";
-import { likeComment } from "../Utils/api";
 
 export const SingleComment = ({
   comment,
@@ -23,16 +22,6 @@ export const SingleComment = ({
 
   const ownComment = comment && user.username === comment.author;
   const border = (ownComment && "2px solid red") || "";
-
-  // const addLike = async () => {
-  //         setCommentLikes(curr=>curr+1);
-  //         try {
-  //         await likeComment(comment.comment_id);
-  //         }
-  //         catch{
-  //             setCommentLikes(curr=>curr-1);
-  //         }
-  //     }
 
   useEffect(async () => {
     if (comment && isProfile) {
@@ -62,6 +51,7 @@ export const SingleComment = ({
                 <img
                   src={commenter.avatar_url}
                   style={{ width: "40px", height: "40px" }}
+                  alt={`${commenter.username}'s avatar`}
                 ></img>
               </Card.Header>
             </LinkContainer>

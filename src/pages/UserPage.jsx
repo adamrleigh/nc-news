@@ -10,7 +10,6 @@ import { Button, ButtonGroup } from "react-bootstrap";
 import { Articles } from "../Components/Articles";
 import { FaNewspaper, FaComments } from "react-icons/fa";
 import { Card } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 
 export const UserPage = ({ user }) => {
   const { username } = useParams();
@@ -28,8 +27,6 @@ export const UserPage = ({ user }) => {
       (user && user.username) || username
     );
     setUserProfile(userProfileData);
-    const { articles } = await fetchUserArticles(username);
-    setUserArticles(articles);
   }, [username]);
 
   return (

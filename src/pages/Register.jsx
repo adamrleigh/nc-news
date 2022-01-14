@@ -31,7 +31,7 @@ export const Register = () => {
       const { user: userProfile } = await postUser(userInput);
       setRegisterError("");
       setUser(userInput);
-      navigate(`/users/${userInput.username}`);
+      navigate(`/users/${userProfile.username}`);
     } catch (err) {
       setRegisterError(err.message);
     }

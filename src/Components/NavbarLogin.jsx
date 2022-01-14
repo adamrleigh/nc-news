@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import { FaUserCircle } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 import { Navbar } from "react-bootstrap";
 
 export const NavbarLogin = ({ setShowUserPage }) => {
@@ -12,6 +12,7 @@ export const NavbarLogin = ({ setShowUserPage }) => {
       <img
         src={user.avatar_url}
         style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+        alt={`${user.username}'s avatar`}
       />
     </>
   ) : (
@@ -20,15 +21,14 @@ export const NavbarLogin = ({ setShowUserPage }) => {
         color="white"
         onClick={() => {
           setShowUserPage(true);
-          console.log("yes");
         }}
       >
         Sign in{" "}
       </Navbar.Text>
-      <FaUserCircle
-        className="text-muted"
+      <FaSignInAlt
         placemenet="end"
         className="justify-content-end "
+        style={{ color: "white" }}
       />
     </>
   );

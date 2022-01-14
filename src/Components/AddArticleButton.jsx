@@ -1,7 +1,5 @@
-import { Button } from "react-bootstrap";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import { FaNewspaper, FaSortAmountDown } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav } from "react-bootstrap";
 
@@ -12,7 +10,7 @@ export const AddArticleButton = ({ hide }) => {
     <>
       {user.username && !hide ? (
         <LinkContainer to="/newarticle">
-          <Nav className="justify-content-start" activeKey="/home">
+          <Nav className="justify-content-start">
             <Nav.Link>
               <Nav.Item>Date</Nav.Item>
             </Nav.Link>

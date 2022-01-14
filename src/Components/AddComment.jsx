@@ -38,18 +38,16 @@ export const AddComment = ({
     <>
       <h2>New comment:</h2>
       <Form onSubmit={sendComment}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <FloatingLabel controlId="floatingBody" label="Comment">
-            <Form.Control
-              required
-              onChange={(e) => setCommentBody(e.target.value)}
-              value={commentBody}
-              as="textarea"
-              rows={3}
-              style={{ height: "150px" }}
-            />
-          </FloatingLabel>
-        </Form.Group>
+        <FloatingLabel controlId="floatingBody" label="Comment">
+          <Form.Control
+            required
+            onChange={(e) => setCommentBody(e.target.value)}
+            value={commentBody}
+            as="textarea"
+            rows={3}
+            style={{ height: "150px" }}
+          />
+        </FloatingLabel>
         <ButtonGroup>
           <WriteButton size="lg" />
           <CancelButton setState={setState} />

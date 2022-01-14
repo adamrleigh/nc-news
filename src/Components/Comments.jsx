@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { fetchComments, fetchUserComments } from "../Utils/api";
 import { SingleComment } from "./SingleComment";
-import { Button, ButtonGroup, Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { AddComment } from "./AddComment";
 import { FaPencilAlt } from "react-icons/fa";
 import { UserContext } from "../contexts/UserContext";
@@ -16,6 +16,7 @@ export const Comments = ({
   setCommentCount,
   commentCount,
 }) => {
+  const LIMIT = 5;
   const [comments, setComments] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -44,8 +45,6 @@ export const Comments = ({
 
   const navigate = useNavigate();
 
-  const LIMIT = 5;
-
   useEffect(async () => {
     const requestBody = {
       limit: LIMIT,
@@ -67,8 +66,6 @@ export const Comments = ({
   useEffect(async () => {
     setPage(1);
   }, [sortBy, orderBy, navigate]);
-
-  console.log(comments);
 
   return (
     <>
@@ -93,7 +90,7 @@ export const Comments = ({
             />
           ) : null}
           {comments.length && (
-            <Nav className="justify-content-end" activeKey="/home">
+            <Nav className="justify-content-end">
               <NavDropdown title={sortTitle} id="nav-dropdown">
                 <NavDropdown.Item>
                   <strong>{sortByLookup[sortBy]}</strong>
@@ -131,12 +128,14 @@ export const Comments = ({
                       isProfile={true}
                       setComments={setComments}
                       setCommentCount={setCommentCount}
+                      key={comment.comment_id}
                     />
                   ) : (
                     <SingleComment
                       comment={comment}
                       setComments={setComments}
                       setCommentCount={setCommentCount}
+                      key={comment.comment_id}
                     />
                   )
                 )}

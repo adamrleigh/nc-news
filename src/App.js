@@ -13,6 +13,7 @@ import { UserPage } from "./pages/UserPage";
 import { AddArticle } from "./pages/AddArticle";
 import { getStorageValue } from "./Utils/api";
 import { Users } from "./pages/Users";
+import { UnderConstruction } from "./pages/UnderConstruction";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -52,6 +53,7 @@ function App() {
             <Route path="/articles/:article_id" element={<SingleArticle />} />
             <Route path="/users/:username" element={<UserPage />} />
             <Route path="/users/" element={<Users />} />
+            <Route path="/underconstruction/" element={<UnderConstruction />} />
             <Route
               path="/newarticle"
               element={<AddArticle topics={topics} />}

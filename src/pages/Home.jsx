@@ -1,5 +1,4 @@
 import { Articles } from "../Components/Articles";
-import { useState } from "react";
 import { useParams } from "react-router";
 
 export const Home = () => {

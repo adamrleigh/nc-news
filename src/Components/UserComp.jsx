@@ -14,6 +14,7 @@ export const UserComp = ({ user, disabled }) => {
       <img
         src={user.avatar_url}
         style={{ height: "50px", width: "50px", alignSelf: "center" }}
+        alt={`${user.username}'s avatar`}
       ></img>
     </>
   );

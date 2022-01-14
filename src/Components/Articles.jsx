@@ -3,17 +3,15 @@ import { Form, Row, Nav } from "react-bootstrap";
 import { fetchArticles, fetchUserArticles } from "../Utils/api";
 import { ArticlePreview } from "./ArticlePreview";
 import { LoadingSpinner } from "./LoadingSpinner";
-import { Error } from "../pages/Error";
-import { AddArticleButton } from "../Components/AddArticleButton";
 import { PaginationButtons } from "./Pagination";
 import { useSearchParams } from "react-router-dom";
 import { FaSort } from "react-icons/fa";
 import { FaSortAmountUp, FaSortAmountDown } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { NavDropdown } from "react-bootstrap";
-import { useParams } from "react-router";
 
 export const Articles = ({ topic, author, hideAddButton }) => {
+  const LIMIT = 5;
   const [articles, setArticles] = useState([]);
   const [topicError, setTopicError] = useState(false);
   const [orderBy, setOrderBy] = useState("desc");
@@ -44,10 +42,6 @@ export const Articles = ({ topic, author, hideAddButton }) => {
       {sortByLookup[sortBy]}
     </>
   );
-
-  console.log(articles);
-
-  const LIMIT = 5;
 
   useEffect(async () => {
     const requestBody = {
@@ -82,7 +76,7 @@ export const Articles = ({ topic, author, hideAddButton }) => {
       ) : (
         <>
           {articles.length > 0 && (
-            <Nav className="justify-content-end" activeKey="/home">
+            <Nav className="justify-content-end">
               <NavDropdown title={sortTitle} id="nav-dropdown">
                 <NavDropdown.Item>
                   <strong>{sortByLookup[sortBy]}</strong>
@@ -134,71 +128,3 @@ export const Articles = ({ topic, author, hideAddButton }) => {
     </>
   );
 };
-
-//
-
-{
-  /* <Form
-                onChange={(event) => {
-                  setSortBy(event.target.value);
-                  setPage(1);
-                }}
-              >
-                <Form.Label>Sort by: </Form.Label>
-                <div key={`inline-radio`} className="mb-3">
-                  <Form.Check
-                    inline
-                    label="Date"
-                    value="created_at"
-                    name="group1"
-                    type="radio"
-                    id={`inline-1`}
-                    checked={sortBy === "created_at"}
-                  />
-                  <Form.Check
-                    inline
-                    label="Likes"
-                    value="votes"
-                    name="group1"
-                    type="radio"
-                    id={`inline-2`}
-                    checked={sortBy === "votes"}
-                  />
-                  <Form.Check
-                    inline
-                    label="Comments"
-                    value="comment_count"
-                    name="group1"
-                    type="radio"
-                    id={`inline-radio-3`}
-                    checked={sortBy === "comment_count"}
-                  />
-                </div>
-              </Form>
-              <Form
-                onChange={(event) => {
-                  setOrderBy(event.target.value);
-                  setPage(1);
-                }}
-              >
-                <Form.Label>Order by: </Form.Label>
-                <div key={`inline-radio-2`} className="mb-3">
-                  <Form.Check
-                    inline
-                    label="Descending"
-                    value="desc"
-                    name="group2"
-                    type="radio"
-                    id="inline-order-desc"
-                  />
-                  <Form.Check
-                    inline
-                    label="Ascending"
-                    value="asc"
-                    name="group2"
-                    type="radio"
-                    id="inline-order-asc"
-                  />
-                </div>
-              </Form> */
-}

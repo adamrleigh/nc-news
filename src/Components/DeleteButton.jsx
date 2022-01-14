@@ -10,7 +10,6 @@ export const DeleteButton = ({
   article,
   setComments,
   setArticles,
-  setCommentCount,
 }) => {
   const { user } = useContext(UserContext);
 
@@ -20,7 +19,6 @@ export const DeleteButton = ({
     setComments((curr) =>
       curr.filter((curr_comm) => curr_comm.comment_id !== comment.comment_id)
     );
-    // setCommentCount(count=>count-1);
     try {
       deleteComment(comment.comment_id);
     } catch {

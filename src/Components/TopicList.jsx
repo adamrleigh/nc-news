@@ -1,10 +1,4 @@
-import {
-  Offcanvas,
-  ListGroup,
-  NavDropdown,
-  OffcanvasHeader,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Offcanvas, ListGroup } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
@@ -14,10 +8,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { FaGlobeEurope, FaCode } from "react-icons/fa";
 import { FaFutbol } from "react-icons/fa";
+import { FaStar, FaAward } from "react-icons/fa";
 
 export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
   const { user, setUser } = useContext(UserContext);
   const [showTopics, setShowTopics] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const navigate = useNavigate();
 
   const icons = {
@@ -35,7 +31,7 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
       }}
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title style={{ color: "rgb(255, 0, 0)" }}>
+        <Offcanvas.Title style={{ color: "rgb(255, 0, 0)", fontSize: "25px" }}>
           Northcoders news
         </Offcanvas.Title>
       </Offcanvas.Header>
@@ -59,7 +55,6 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
             >
               <LinkContainer to={`/articles/`}>
                 <ListGroup.Item as="li">
-                  {""}
                   {<FaGlobeEurope />}
                   {" All"}
                 </ListGroup.Item>
@@ -87,16 +82,41 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
             </ListGroup.Item>
           )}
           <ListGroup.Item>
-            <Offcanvas.Title
-              onClick={() => {
-                setShowOffCanvas(false);
-                navigate("/users");
-              }}
-            >
+            <Offcanvas.Title onClick={() => setShowUserMenu((curr) => !curr)}>
               <FaUsers />
               {" Users"}
             </Offcanvas.Title>
           </ListGroup.Item>
+          <div style={{ marginLeft: "40px" }}>
+            <ListGroup
+              variant="flush"
+              as="ul"
+              onClick={() => {
+                setShowOffCanvas(false);
+                setShowUserMenu(false);
+              }}
+              hidden={!showUserMenu}
+            >
+              <LinkContainer to={`/users/`}>
+                <ListGroup.Item as="li">
+                  {<FaGlobeEurope />}
+                  {" All"}
+                </ListGroup.Item>
+              </LinkContainer>
+              <LinkContainer to={`/underconstruction`}>
+                <ListGroup.Item as="li">
+                  {<FaStar />}
+                  {" Most active"}
+                </ListGroup.Item>
+              </LinkContainer>
+              <LinkContainer to={`/underconstruction`}>
+                <ListGroup.Item as="li">
+                  {<FaAward />}
+                  {" Highest rated"}
+                </ListGroup.Item>
+              </LinkContainer>
+            </ListGroup>
+          </div>
           {user.username && (
             <ListGroup.Item>
               <Offcanvas.Title
