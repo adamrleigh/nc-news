@@ -9,6 +9,7 @@ export const DeleteButton = ({
   comment,
   article,
   setComments,
+  setCommentCount,
   setArticles,
 }) => {
   const { user } = useContext(UserContext);
@@ -16,13 +17,15 @@ export const DeleteButton = ({
   const navigate = useNavigate();
 
   const handleDeleteComment = async () => {
-    setComments((curr) =>
-      curr.filter((curr_comm) => curr_comm.comment_id !== comment.comment_id)
-    );
+    setCommentCount((curr) => Number(curr) - 1);
     try {
       deleteComment(comment.comment_id);
+      setComments((curr) =>
+        curr.filter((curr_comm) => curr_comm.comment_id !== comment.comment_id)
+      );
     } catch {
       console.log("BAD");
+      setCommentCount((curr) => curr + 1);
     }
   };
 
