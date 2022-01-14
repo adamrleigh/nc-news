@@ -1,20 +1,33 @@
 import { ButtonGroup, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { getDate } from "../Utils/api";
+import { fetchUser, getDate } from "../Utils/api";
 import { LikeButton } from "./LikeButton";
 import { CommentButton } from "./CommentButton";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
 
-export const ArticlePreview = ({ article, setTopic, setArticles }) => {
+export const ArticlePreview = ({ article, page, setTopic, setArticles }) => {
   const { user } = useContext(UserContext);
+  const [avatar, setAvatar] = useState("");
 
   const navigate = useNavigate();
 
   const ownArticle = article.author === user.username;
   const border = (ownArticle && "5px solid red") || "";
+
+  useEffect(async () => {
+    try {
+      const {
+        user: { avatar_url },
+      } = await fetchUser(article.author);
+      setAvatar(avatar_url);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [page, navigate]);
 
   return (
     <Card bg="dark" text="white" style={{ border: `${border}` }}>
@@ -36,6 +49,12 @@ export const ArticlePreview = ({ article, setTopic, setArticles }) => {
         <br></br>
         <small onClick={() => navigate(`/users/${article.author}`)}>
           @{article.author}
+          <br></br>
+          <img
+            src={avatar}
+            alt={`${article.authors}'s avatar'`}
+            style={{ width: "40px", height: "40px" }}
+          />
         </small>
         <DeleteButton article={article} setArticles={setArticles} />
         <br></br>

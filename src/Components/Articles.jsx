@@ -108,7 +108,12 @@ export const Articles = ({ topic, author, hideAddButton }) => {
             <>
               <Row lg={1} className="g-4">
                 {articles.map((article) => (
-                  <ArticlePreview article={article} setArticles={setArticles} />
+                  <ArticlePreview
+                    page={page}
+                    article={article}
+                    setArticles={setArticles}
+                    key={`${article.article_id}`}
+                  />
                 ))}
               </Row>
               <PaginationButtons
