@@ -1,6 +1,6 @@
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { FaNewspaper, FaComments } from "react-icons/fa";
+import { FaNewspaper, FaComments, FaThumbsUp } from "react-icons/fa";
 
 export const UserComp = ({
   user,
@@ -8,6 +8,8 @@ export const UserComp = ({
   setShowArticles,
   setShowComments,
   small,
+  articleCount,
+  commentCount,
 }) => {
   const navigate = useNavigate();
 
@@ -53,7 +55,7 @@ export const UserComp = ({
                     setShowArticles((curr) => !curr);
                   }}
                 >
-                  Articles <FaNewspaper />
+                  {user.article_count} <FaNewspaper />
                 </Button>
                 <Button
                   variant="success"
@@ -62,7 +64,10 @@ export const UserComp = ({
                     setShowComments((curr) => !curr);
                   }}
                 >
-                  Comments <FaComments />
+                  {user.comment_count} <FaComments />
+                </Button>
+                <Button variant="primary" disabled>
+                  {user.total_votes} <FaThumbsUp />
                 </Button>
               </ButtonGroup>
             ) : null}

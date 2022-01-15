@@ -13,7 +13,6 @@ export const DeleteButton = ({
   setArticles,
 }) => {
   const { user } = useContext(UserContext);
-
   const navigate = useNavigate();
 
   const handleDeleteComment = async () => {
