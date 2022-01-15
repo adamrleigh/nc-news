@@ -46,8 +46,7 @@ export const UserPage = ({ user }) => {
             setShowArticles={setShowArticles}
             setShowComments={setShowComments}
           />
-          <br></br>
-          <br></br>
+
           {showComments ? (
             <Comments
               username={(userProfile && userProfile.username) || username}
