@@ -29,6 +29,7 @@ export const UserComp = ({
             width: "20rem",
             color: "black",
             paddingTop: "5px",
+            border: "2px solid black",
           }}
         >
           <Card.Img
@@ -51,6 +52,7 @@ export const UserComp = ({
                 <Button
                   variant="dark"
                   onClick={() => {
+                    if (!user.article_count) return;
                     setShowComments(false);
                     setShowArticles((curr) => !curr);
                   }}
@@ -63,10 +65,11 @@ export const UserComp = ({
                     setShowArticles(false);
                     setShowComments((curr) => !curr);
                   }}
+                  disabled={!user.comment_count}
                 >
                   {user.comment_count} <FaComments />
                 </Button>
-                <Button variant="primary" disabled>
+                <Button variant="primary">
                   {user.total_votes} <FaThumbsUp />
                 </Button>
               </ButtonGroup>

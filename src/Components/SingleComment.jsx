@@ -41,12 +41,14 @@ export const SingleComment = ({
         <Card color="black" bg="white" style={{ border: `${border}` }}>
           {isProfile ? (
             <LinkContainer to={`/articles/${comment.article_id}`}>
-              <Card.Header color="orange">{article.title}</Card.Header>
+              <Card.Header color="black">
+                <strong>{article.title}</strong>
+              </Card.Header>
             </LinkContainer>
           ) : (
             <LinkContainer to={`/users/${comment.author}`}>
               <Card.Header>
-                @{comment.author}
+                <strong>@{comment.author}</strong>
                 <br></br>
                 <img
                   src={commenter.avatar_url}
@@ -65,7 +67,6 @@ export const SingleComment = ({
               setComments={setComments}
               setCommentCount={setCommentCount}
             />
-            <br></br>
             <small className="mb-2 text-muted" color="">
               {getDate(comment.created_at)} - {getTime(comment.created_at)}
             </small>
