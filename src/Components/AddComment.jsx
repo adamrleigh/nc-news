@@ -1,4 +1,4 @@
-import { ButtonGroup, Form, Alert, FloatingLabel } from "react-bootstrap";
+import { Form, Alert, FloatingLabel } from "react-bootstrap";
 import { WriteButton } from "./WriteButton";
 import { CancelButton } from "./CancelButton";
 import { postComment } from "../Utils/api";
@@ -17,21 +17,24 @@ export const AddComment = ({
 
   const { user } = useContext(UserContext);
 
-  const sendComment = async (event) => {
+  const sendComment = (event) => {
     event.preventDefault();
     setPostError(false);
     setCommentCount((curr) => Number(curr) + 1);
-    try {
-      const { comment } = await postComment(article_id, {
-        author: user.username,
-        body: commentBody,
-      });
-      setComments((curr) => [...curr, comment]);
-      setState(false);
-    } catch (err) {
-      setPostError(err.message);
-      setCommentCount((curr) => curr - 1);
-    }
+
+    (async () => {
+      try {
+        const { comment } = await postComment(article_id, {
+          author: user.username,
+          body: commentBody,
+        });
+        setComments((curr) => [...curr, comment]);
+        setState(false);
+      } catch (err) {
+        setPostError(err.message);
+        setCommentCount((curr) => curr - 1);
+      }
+    })();
   };
 
   return (

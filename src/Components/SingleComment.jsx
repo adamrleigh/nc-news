@@ -16,24 +16,27 @@ export const SingleComment = ({
   const { user } = useContext(UserContext);
   const [article, setArticle] = useState({});
   const [commenter, setCommenter] = useState({});
-  const [commentLikes, setCommentLikes] = useState(
-    (comment && comment.votes) || 0
-  );
 
   const ownComment = comment && user.username === comment.author;
   const border = (ownComment && "2px solid red") || "";
 
-  useEffect(async () => {
-    if (comment && isProfile) {
-      const { article: commentArticle } = await fetchArticleById(
-        comment.article_id
-      );
-      setArticle(commentArticle);
-    } else if (comment) {
-      const { user: commenter } = await fetchUser(comment.author);
-      setCommenter(commenter);
-    }
-  }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        if (comment && isProfile) {
+          const { article: commentArticle } = await fetchArticleById(
+            comment.article_id
+          );
+          setArticle(commentArticle);
+        } else if (comment) {
+          const { user: commenter } = await fetchUser(comment.author);
+          setCommenter(commenter);
+        }
+      } catch {
+        console.log("error in SingleComment when fetching data");
+      }
+    })();
+  }, [comment, isProfile]);
 
   return (
     <>
@@ -72,7 +75,7 @@ export const SingleComment = ({
             </small>
           </Card.Footer>
           <LikeButton
-            votes={commentLikes}
+            votes={comment && comment.votes}
             comment_id={comment.comment_id}
             disabled={isProfile}
           />

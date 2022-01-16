@@ -9,12 +9,11 @@ export const AddArticle = ({ topics }) => {
   const [postError, setPostError] = useState(false);
 
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user.username) navigate(`/`);
-  }, [user]);
-
-  const navigate = useNavigate();
+  }, [user, navigate]);
 
   const handleChange = (event, field) => {
     setUserPost({ ...userPost, [field]: event.target.value });

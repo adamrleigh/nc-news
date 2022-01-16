@@ -1,4 +1,4 @@
-import { FaHardHat, FaWrench, FaHammer } from "react-icons/fa";
+import { FaHammer } from "react-icons/fa";
 
 export const UnderConstruction = () => {
   return (

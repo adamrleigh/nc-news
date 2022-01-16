@@ -45,25 +45,28 @@ export const Comments = ({
 
   const navigate = useNavigate();
 
-  useEffect(async () => {
+  useEffect(() => {
     const requestBody = {
       limit: LIMIT,
       p: page,
       sort_by: sortBy,
       order: orderBy,
     };
-    try {
-      const { comments } = article_id
-        ? await fetchComments(article_id, requestBody)
-        : await fetchUserComments(username, requestBody);
-      setComments(comments);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [page, sortBy, orderBy, commentCount]);
 
-  useEffect(async () => {
+    (async () => {
+      try {
+        const { comments } = article_id
+          ? await fetchComments(article_id, requestBody)
+          : await fetchUserComments(username, requestBody);
+        setComments(comments);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [page, sortBy, orderBy, commentCount, article_id, username]);
+
+  useEffect(() => {
     setPage(1);
   }, [sortBy, orderBy, navigate]);
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, NavItem } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router";
@@ -18,7 +18,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (user.username) navigate(`/users/${user.username}`);
-  }, []);
+  }, [user, navigate]);
 
   const handleChange = (event, field) => {
     setUserInput({ ...userInput, [field]: event.target.value });

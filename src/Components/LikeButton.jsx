@@ -12,9 +12,9 @@ export const LikeButton = ({ votes, comment_id, article_id, disabled }) => {
   const [icon, setIcon] = useState(FaRegThumbsUp);
   const [liked, setLiked] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     setCount(votes);
-  }, [votes]);
+  }, [votes, setCount]);
 
   const handleClick = async () => {
     if (!liked) {

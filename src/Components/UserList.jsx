@@ -7,10 +7,9 @@ import { fetchUser } from "../Utils/api";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 
 export const UserList = ({ showOffCanvas, setShowOffCanvas }) => {
-  const [loginError, setLoginError] = useState(false);
   const [username, setUsername] = useState("grumpy19");
 
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -18,17 +17,15 @@ export const UserList = ({ showOffCanvas, setShowOffCanvas }) => {
     try {
       event.preventDefault();
       const { user: userProfile } = await fetchUser(username);
-      setLoginError(false);
       setUser(userProfile);
       setShowOffCanvas(false);
       navigate(`/users/${username}`);
     } catch (err) {
-      setLoginError(true);
+      console.log("login error");
     }
   };
 
   const handleChange = (e) => {
-    setLoginError(false);
     setUsername(e.target.value);
   };
 

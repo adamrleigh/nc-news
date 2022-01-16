@@ -1,12 +1,21 @@
 import { Pagination } from "react-bootstrap";
+import { useLocation } from "react-router";
+import { useParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 export const PaginationButtons = ({ page, setPage, limit, totalCount }) => {
   let pageButtons = [];
+  const location = useLocation();
+  const params = useParams();
+  const searchParams = useSearchParams();
 
   for (let p = 1; p * limit < totalCount; p++) {
     pageButtons.push(
       <Pagination.Item
-        onClick={() => setPage(p + 1)}
+        onClick={() => {
+          setPage(p + 1);
+          console.log(location.pathname, params, searchParams);
+        }}
         active={page === p + 1}
         key={`${p + 1}`}
       >

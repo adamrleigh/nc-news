@@ -30,15 +30,13 @@ export const Navigation = ({ topics }) => {
               <FaBars />
             </Nav.Link>
             <LinkContainer
-              to="/"
+              to="/?p=1"
               style={{
                 paddingRight: "5px",
                 color: "white",
               }}
             >
-              <Navbar.Brand className="justify-content-center">
-                {"Northcoders news "}
-              </Navbar.Brand>
+              <Navbar.Brand>{"Northcoders news "}</Navbar.Brand>
             </LinkContainer>
             <TopicList
               topics={topics}

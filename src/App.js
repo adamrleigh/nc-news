@@ -26,16 +26,16 @@ function App() {
   };
 
   const [topics, setTopics] = useState([]);
-  const [topicsError, setTopicsError] = useState(false);
 
-  useEffect(async () => {
-    try {
-      const { topics } = await fetchTopics();
-      setTopics(topics);
-      setTopicsError(false);
-    } catch {
-      setTopicsError(true);
-    }
+  useEffect(() => {
+    (async () => {
+      try {
+        const { topics } = await fetchTopics();
+        setTopics(topics);
+      } catch {
+        console.log("error fetching topics");
+      }
+    })();
   }, []);
 
   return (

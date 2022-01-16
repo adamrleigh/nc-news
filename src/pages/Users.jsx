@@ -8,14 +8,16 @@ export const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
-    try {
-      const { users } = await fetchUsers();
-      setUsers(users);
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
+  useEffect(() => {
+    (async () => {
+      try {
+        const { users } = await fetchUsers();
+        setUsers(users);
+        setLoading(false);
+      } catch {
+        setLoading(false);
+      }
+    })();
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, Row, Nav } from "react-bootstrap";
+import { Row, Nav } from "react-bootstrap";
 import { fetchArticles, fetchUserArticles } from "../Utils/api";
 import { ArticlePreview } from "./ArticlePreview";
 import { LoadingSpinner } from "./LoadingSpinner";
@@ -13,7 +13,6 @@ import { NavDropdown } from "react-bootstrap";
 export const Articles = ({ topic, author, hideAddButton }) => {
   const LIMIT = 5;
   const [articles, setArticles] = useState([]);
-  const [topicError, setTopicError] = useState(false);
   const [orderBy, setOrderBy] = useState("desc");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ export const Articles = ({ topic, author, hideAddButton }) => {
     </>
   );
 
-  useEffect(async () => {
+  useEffect(() => {
     const requestBody = {
       limit: LIMIT,
       p: page,
@@ -51,21 +50,31 @@ export const Articles = ({ topic, author, hideAddButton }) => {
       sort_by: sortBy,
       order: orderBy,
     };
-    try {
-      const { articles } = !hideAddButton
-        ? await fetchArticles(requestBody)
-        : await fetchUserArticles(author, requestBody);
-      setArticles(articles);
-      setTopicError(false);
-      setLoading(false);
-    } catch {
-      console.log(!hideAddButton, fetchUserArticles, requestBody);
-      setTopicError(true);
-      setLoading(false);
-    }
-  }, [topic, sortBy, orderBy, page, searchParams, navigate]);
 
-  useEffect(async () => {
+    (async () => {
+      try {
+        const { articles } = !hideAddButton
+          ? await fetchArticles(requestBody)
+          : await fetchUserArticles(author, requestBody);
+        setArticles(articles);
+        setLoading(false);
+      } catch {
+        console.log(!hideAddButton, fetchUserArticles, requestBody);
+        setLoading(false);
+      }
+    })();
+  }, [
+    topic,
+    sortBy,
+    orderBy,
+    page,
+    searchParams,
+    navigate,
+    author,
+    hideAddButton,
+  ]);
+
+  useEffect(() => {
     setPage(1);
   }, [topic, sortBy, orderBy, searchParams, navigate]);
 

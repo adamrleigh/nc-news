@@ -22,19 +22,21 @@ export const SingleArticle = () => {
 
   const navigate = useNavigate();
 
-  useEffect(async () => {
-    try {
-      const { article } = await fetchArticleById(article_id);
-      const { user: authorUser } = await fetchUser(article.author);
-      setArticleError(false);
-      setAuthor(authorUser);
-      setArticle(article);
-      setTimeStamp(getDate(article.created_at));
-      setCommentCount(article.comment_count);
-    } catch {
-      setArticleError(true);
-    }
-  }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { article } = await fetchArticleById(article_id);
+        const { user: authorUser } = await fetchUser(article.author);
+        setArticleError(false);
+        setAuthor(authorUser);
+        setArticle(article);
+        setTimeStamp(getDate(article.created_at));
+        setCommentCount(article.comment_count);
+      } catch {
+        setArticleError(true);
+      }
+    })();
+  }, [article_id]);
 
   return (
     <>
