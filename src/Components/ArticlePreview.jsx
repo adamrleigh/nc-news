@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
-export const ArticlePreview = ({ article, page, setTopic, setArticles }) => {
+export const ArticlePreview = ({ article, page }) => {
   const { user } = useContext(UserContext);
   const [avatar, setAvatar] = useState("");
 
@@ -17,16 +17,18 @@ export const ArticlePreview = ({ article, page, setTopic, setArticles }) => {
   const ownArticle = article.author === user.username;
   const border = (ownArticle && "5px solid red") || "";
 
-  useEffect(async () => {
-    try {
-      const {
-        user: { avatar_url },
-      } = await fetchUser(article.author);
-      setAvatar(avatar_url);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [page, navigate]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          user: { avatar_url },
+        } = await fetchUser(article.author);
+        setAvatar(avatar_url);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [page, navigate, article]);
 
   return (
     <Card bg="dark" text="white" style={{ border: `${border}` }}>
