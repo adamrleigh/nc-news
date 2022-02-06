@@ -29,7 +29,7 @@ Northcoders news is a simple, full-stack, reddit-like news app created during no
 
 ### Dependencies
 
-- Node v17+
+- Node v16+
 - NPM v8+
 - Github CLI
 
