@@ -27,7 +27,7 @@ Northcoders news is a simple, full-stack, reddit-like news app created during no
 
 ## Using the app
 
-### Dependencies
+### Requirements
 
 - Node v16+
 - NPM v8+
