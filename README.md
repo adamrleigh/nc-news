@@ -1,4 +1,4 @@
-# Northcoders news front end
+# Northcoders News - Front End
 
 This is the repo for the front-end of my Northcoders news app.
 
