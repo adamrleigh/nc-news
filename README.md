@@ -1,6 +1,6 @@
 # Northcoders News - Front End
 
-This is the repo for the front-end of my Northcoders news app.
+This is the repo for the front end of my Northcoders news app.
 
 Northcoders news is a simple, full-stack, reddit-like news app created during northcoders 13-week web development bootcamp.
 
