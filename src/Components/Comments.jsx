@@ -124,24 +124,24 @@ export const Comments = ({
           {comments.length ? (
             <>
               <Row lg={1} className="g-4">
-                {comments.map((comment) =>
-                  !article_id ? (
-                    <SingleComment
-                      comment={comment}
-                      isProfile={true}
-                      setComments={setComments}
-                      setCommentCount={setCommentCount}
-                      key={comment.comment_id}
-                    />
-                  ) : (
-                    <SingleComment
-                      comment={comment}
-                      setComments={setComments}
-                      setCommentCount={setCommentCount}
-                      key={comment.comment_id}
-                    />
-                  )
-                )}
+                {comments.map((comment) => (
+                  <div key={comment.comment_id}>
+                    {!article_id ? (
+                      <SingleComment
+                        comment={comment}
+                        isProfile={true}
+                        setComments={setComments}
+                        setCommentCount={setCommentCount}
+                      />
+                    ) : (
+                      <SingleComment
+                        comment={comment}
+                        setComments={setComments}
+                        setCommentCount={setCommentCount}
+                      />
+                    )}
+                  </div>
+                ))}
               </Row>
               <PaginationButtons
                 page={page}

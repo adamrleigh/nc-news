@@ -32,8 +32,6 @@ export const AddArticle = ({ topics }) => {
     }
   };
 
-  console.log(userPost);
-
   return (
     <>
       <h1>Add article</h1>
@@ -67,7 +65,9 @@ export const AddArticle = ({ topics }) => {
                 Select topic
               </option>
               {topics.map((topic) => (
-                <option value={topic.slug}>{topic.slug}</option>
+                <option value={topic.slug} key={topic.slug}>
+                  {topic.slug}
+                </option>
               ))}
             </Form.Select>
           </FloatingLabel>

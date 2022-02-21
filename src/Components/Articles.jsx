@@ -96,6 +96,7 @@ export const Articles = ({ topic, author, hideAddButton }) => {
                       setSortBy(sortKey);
                       setPage(1);
                     }}
+                    key={sortKey}
                     hidden={sortKey === sortBy}
                   >
                     {sortByLookup[sortKey]}
@@ -117,12 +118,13 @@ export const Articles = ({ topic, author, hideAddButton }) => {
             <>
               <Row lg={1} className="g-4">
                 {articles.map((article) => (
-                  <ArticlePreview
-                    page={page}
-                    article={article}
-                    setArticles={setArticles}
-                    key={`${article.article_id}`}
-                  />
+                  <div key={`${article.article_id}`}>
+                    <ArticlePreview
+                      page={page}
+                      article={article}
+                      setArticles={setArticles}
+                    />
+                  </div>
                 ))}
               </Row>
               <PaginationButtons

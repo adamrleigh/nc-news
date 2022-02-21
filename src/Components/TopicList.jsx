@@ -63,6 +63,7 @@ export const TopicList = ({ topics, showOffCanvas, setShowOffCanvas }) => {
                 <LinkContainer
                   to={`/topics/${topic.slug}`}
                   style={{ marginLeft: "20px" }}
+                  key={topic.slug}
                 >
                   <ListGroup.Item as="li">
                     {icons[topic.slug]} {topic.slug}
